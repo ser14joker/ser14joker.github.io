@@ -5,9 +5,13 @@ import { useEffect } from 'react';
 const App = () => {
 
   useEffect(()=> {
-      window.addEventListener('load', () =>{ 
-        document.body.className = document.body.className.replace(/\bis-preload\b/, ''); 
-      });
+    const loadHandler = () =>{ 
+      document.body.className = document.body.className.replace(/\bis-preload\b/, ''); 
+    }
+    window.addEventListener('load', loadHandler);
+    return ()=> {
+      window.removeEventListener('load', loadHandler);
+    }
   }, []);
 
   return (
